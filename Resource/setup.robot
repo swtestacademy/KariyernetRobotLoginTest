@@ -4,14 +4,20 @@ Library  Selenium2Library
 *** Variables ***
 ${Username}  swtestacademy@gmail.com
 ${Password}  wrongpass
-${Browser}  Firefox
+${Browser}  Chrome
 ${SiteUrl}  http://www.kariyer.net/
-${DashboardTitle}  İş arayanlar için iş ilanları, eleman arayanlar için eleman - Kariyer.net
+${DashboardTitle}  İş ilanları & Kariyer Tavsiyeleri Kariyer.net'te!
 ${ExpectedWarningMessage}  Kullanıcı adı, E-posta ve şifrenizi kontrol ederek tekrar deneyin.
 ${WarningMessage}  Login Failed!
 ${Delay}  5s
+
+*** Keywords *** 
+Open Chrome With Options
+     ${options}=  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys, selenium.webdriver
+     Call Method    ${options}    add_argument      start-maximized
+	 Call Method    ${options}    add_argument      disable-extensions
+     Create WebDriver  Chrome    chrome_options=${options}
  
-*** Keywords ***
 Open Kariyernet
     Open Browser   url=${SiteUrl}   browser=${Browser} 
 	
